@@ -12,9 +12,11 @@ app.use(express.json());
 
 // Importar rutas de autenticación
 const authRoutes = require('./routes/authRoutes');
+const asistenciaRoutes = require('./routes/asistenciaRoutes');
 
 // Usar las rutas
 app.use('/api/auth', authRoutes);
+app.use('/api/asistencia', asistenciaRoutes);
 
 // Conexión a la base de datos de MongoDB (este código ya lo tienes)
 mongoose.connect(process.env.MONGO_URI, {
