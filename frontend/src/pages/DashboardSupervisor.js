@@ -1,6 +1,7 @@
-// Ejemplo de un dashboard vacío
 import React from 'react';
-const DashboardTecnico = () => {
-    return <h1>Dashboard del Técnico</h1>;
+
+const DashboardSupervisor = () => {
+  return <h1>Dashboard del Supervisor</h1>;
 };
+
 export default DashboardSupervisor;
