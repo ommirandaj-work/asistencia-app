@@ -8,6 +8,7 @@ const DashboardTecnico = () => {
     const [geolocalizacion, setGeolocalizacion] = useState(null);
 
     const obtenerGeolocalizacion = () => {
+        setEstado('Obteniendo geolocalización...');
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -15,7 +16,7 @@ const DashboardTecnico = () => {
                         lat: position.coords.latitude,
                         lon: position.coords.longitude,
                     });
-                    setEstado('Geolocalización obtenida.');
+                    setEstado('Geolocalización obtenida. Ahora puedes registrar tu asistencia.');
                 },
                 (error) => {
                     console.error(error);
@@ -29,8 +30,7 @@ const DashboardTecnico = () => {
 
     const registrarAsistencia = async (tipo, modalidad) => {
         if (!geolocalizacion) {
-            setEstado('Obteniendo geolocalización...');
-            obtenerGeolocalizacion();
+            setEstado('Primero obtén tu geolocalización.');
             return;
         }
 
@@ -43,7 +43,7 @@ const DashboardTecnico = () => {
                 tipo,
                 modalidad,
                 geolocalizacion,
-                foto_url: 'temporal_url' // Valor temporal
+                foto_url: 'temporal_url'
             });
 
             if (res.status === 201) {
@@ -56,15 +56,24 @@ const DashboardTecnico = () => {
     };
 
     return (
-        <div>
+        <div style={{ padding: '20px', textAlign: 'center' }}>
             <h1>Dashboard del Técnico</h1>
             <p>{estado}</p>
-            <button onClick={() => registrarAsistencia('Entrada', 'Presencial')}>
-                Registrar Entrada
-            </button>
-            <button onClick={() => registrarAsistencia('Salida', 'Presencial')}>
-                Registrar Salida
-            </button>
+            {!geolocalizacion && (
+                <button onClick={obtenerGeolocalizacion}>
+                    Obtener mi Geolocalización
+                </button>
+            )}
+            {geolocalizacion && (
+                <div>
+                    <button onClick={() => registrarAsistencia('Entrada', 'Presencial')} style={{ margin: '10px' }}>
+                        Registrar Entrada
+                    </button>
+                    <button onClick={() => registrarAsistencia('Salida', 'Presencial')} style={{ margin: '10px' }}>
+                        Registrar Salida
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

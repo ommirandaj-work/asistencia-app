@@ -2,12 +2,9 @@ const Asistencia = require('../models/Asistencia');
 
 exports.registrarAsistencia = async (req, res) => {
     const { tecnicoId, tipo, modalidad, geolocalizacion, foto_url } = req.body;
-    const hora_registro = new Date().toTimeString().slice(0, 5);
-
+    const hora_registro = new Date().toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hour12: false});
+    
     try {
-        // Aquí puedes agregar lógica para verificar tardanza,
-        // pero la dejaremos simple por ahora para la prueba.
-
         const nuevaAsistencia = new Asistencia({
             tecnico: tecnicoId,
             tipo,
@@ -15,7 +12,6 @@ exports.registrarAsistencia = async (req, res) => {
             geolocalizacion,
             foto_url,
             hora_registro,
-            // Los campos de tardanza los puedes dejar con valores por defecto
         });
 
         await nuevaAsistencia.save();
