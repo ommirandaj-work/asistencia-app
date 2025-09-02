@@ -6,11 +6,11 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middlewares
+// Middleware para habilitar CORS y procesar JSON
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // <--- Esta línea es crucial y debe ir aquí
 
-// Importar rutas de autenticación
+// Importar rutas de la API
 const authRoutes = require('./routes/authRoutes');
 const asistenciaRoutes = require('./routes/asistenciaRoutes');
 
@@ -18,7 +18,7 @@ const asistenciaRoutes = require('./routes/asistenciaRoutes');
 app.use('/api/auth', authRoutes);
 app.use('/api/asistencia', asistenciaRoutes);
 
-// Conexión a la base de datos de MongoDB (este código ya lo tienes)
+// Conexión a la base de datos de MongoDB
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
