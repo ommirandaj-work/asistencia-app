@@ -15,8 +15,10 @@ const Login = () => {
         try {
             const res = await axios.post(`${API_URL}/api/auth/login`, { username, password });
             
+            // Guardar el token y los datos del usuario en el almacenamiento local del navegador
             localStorage.setItem('user', JSON.stringify(res.data));
             
+            // Redirigir al usuario según su rol
             if (res.data.role === 'Tecnico') {
                 navigate('/tecnico/dashboard');
             } else if (res.data.role === 'Administrador') {

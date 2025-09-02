@@ -1,22 +1,19 @@
-### 1. Registrar un nuevo usuario (User Registration)
-# @name registerUser
+### Crear un nuevo usuario
 POST https://asistencia-backend-crtm.onrender.com/api/auth/register
 Content-Type: application/json
 
 {
-    "username": "tecnico-test",
-    "password": "simplepassword",
+    "username": "tecnico-demo",
+    "password": "demo",
     "role": "Tecnico"
 }
 
----
 
-### 2. Iniciar sesión (Login)
-# @name loginUser
+### Iniciar sesión con el nuevo usuario
 POST https://asistencia-backend-crtm.onrender.com/api/auth/login
 Content-Type: application/json
 
 {
-    "username": "tecnico-test",
-    "password": "simplepassword"
+    "username": "tecnico-demo",
+    "password": "demo"
 }
