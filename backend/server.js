@@ -6,11 +6,11 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware para habilitar CORS y procesar JSON
-app.use(express.json()); // <--- Esta línea es crucial y debe ir aquí
-app.use(cors());
+// Middlewares
+app.use(express.json()); // <--- DEBE ESTAR AQUÍ
+app.use(cors()); 
 
-// Importar rutas de la API
+// Importar rutas
 const authRoutes = require('./routes/authRoutes');
 const asistenciaRoutes = require('./routes/asistenciaRoutes');
 
